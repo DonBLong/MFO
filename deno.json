@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "dev": "deno run -R -W -E -N=api.tvmaze.com main.ts",
+    "compile": "deno compile -r -R -W -E -N=api.tvmaze.com main.ts"
+  }
+}
