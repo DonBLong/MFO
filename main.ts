@@ -18,22 +18,26 @@ spinner.stop();
 
 if (!renameMap) {
   console.error(
-    `Directory ${dir} does not contain any (${config.fileExtensions.join(
+    `Could not fetch show data or directory ${dir} does not contain any (${config.fileExtensions.join(
       " | "
     )}) files`
   );
   Deno.exit();
 }
+if (!renameMap.length) {
+  console.log(`All files in ${dir} are organized propperly`);
+  console.log("*** Done ***");
+  Deno.exit();
+}
 console.log("Rename map:");
-if (group) console.table(renameMap);
-else console.table(renameMap, ["oldName", "newName"]);
+console.table(renameMap, ["oldPath", "newPath"]);
 
 const answer = prompt("Would you like to proceed? (y/n): ");
 
-if (answer == null || answer === "n") Deno.exit();
+if (answer !== "y") Deno.exit();
 spinner.message = "Renaming files...";
 spinner.start();
-const filesRenamedCount = await renameFiles(dir, renameMap, group);
+const filesRenamedCount = renameFiles(renameMap);
 spinner.stop();
 console.log("Files-renamed count:", filesRenamedCount);
 console.log("*** Done ***");

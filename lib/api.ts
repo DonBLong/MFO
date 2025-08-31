@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "npm:axios@1.11.0";
-import type { APIConfig, Episode } from "./mfo.ts";
+import type { TVAPIConfig, Episode } from "./mfo.ts";
 
 export default async function getEpisodeList(
-  apiConfig: APIConfig,
+  apiConfig: TVAPIConfig,
   title: string,
   season?: number | string
 ): Promise<Episode[] | undefined> {
